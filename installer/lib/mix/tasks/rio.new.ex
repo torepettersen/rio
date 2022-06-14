@@ -6,7 +6,7 @@ defmodule Mix.Tasks.Rio.New do
 
   alias Rio.New.Project
   alias Rio.New.Generator
-  alias Rio.New.Single
+  alias Rio.New.Live
 
   @version Mix.Project.config()[:version]
 
@@ -16,7 +16,7 @@ defmodule Mix.Tasks.Rio.New do
   end
 
   def run([base_path] = _argv) do
-    generator = Single
+    generator = Live
 
     base_path
     |> Project.new()

@@ -10,6 +10,7 @@ import Config<%= if @ecto do %>
 config :<%= @app_name %>,
   ecto_repos: [<%= @app_module %>.Repo]
 
+# Configure migration defaults
 config :<%= @app_name %>, <%= @app_module %>.Repo,
   migration_primary_key: [type: :binary_id, default: {:fragment, "uuid_generate_v4()"}],
   migration_foreign_key: [type: :binary_id],
@@ -43,6 +44,16 @@ config :esbuild,
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]<% end %>
+
+# Configure tailwindcss
+config :tailwind, version: "3.1.2", default: [
+  args: ~w(
+    --config=tailwind.config.js
+    --input=css/app.css
+    --output=../priv/static/assets/app.css
+  ),
+  cd: Path.expand("../assets", __DIR__)
+]
 
 # Configures Elixir's Logger
 config :logger, :console,
