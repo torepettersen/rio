@@ -57,7 +57,7 @@ defmodule Rio.New.Generator do
   end
 
   defp expand_path_with_bindings(path, %Project{} = project) do
-    Regex.replace(Regex.recompile!(~r/:[a-zA-Z0-9_]+/), path, fn ":" <> key, _ ->
+    Regex.replace(~r/:[a-zA-Z0-9_]+/, path, fn ":" <> key, _ ->
       project |> Map.fetch!(:"#{key}") |> to_string()
     end)
   end

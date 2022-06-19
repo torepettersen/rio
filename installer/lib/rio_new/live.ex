@@ -16,7 +16,7 @@ defmodule Rio.New.Live do
       {:eex, "phx_web/views/error_helpers.ex", "lib/:lib_web_name/views/error_helpers.ex"},
       {:eex, "phx_web/views/error_view.ex", "lib/:lib_web_name/views/error_view.ex"},
       {:eex, "phx_web/endpoint.ex", "lib/:lib_web_name/endpoint.ex"},
-      {:eex, "phx_web/router.ex", "lib/:lib_web_name/router.ex"},
+      {:eex, "rio_web/router.ex", "lib/:lib_web_name/router.ex"},
       {:eex, "phx_web/telemetry.ex", "lib/:lib_web_name/telemetry.ex"},
       {:eex, "phx_single/lib/app_name_web.ex", "lib/:lib_web_name.ex"},
       {:eex, "rio_live/mix.exs", "mix.exs"},
@@ -34,12 +34,6 @@ defmodule Rio.New.Live do
       {:eex, "phx_gettext/errors.pot", "priv/gettext/errors.pot"}
     ],
     html: [
-      {:eex, "phx_web/controllers/page_controller.ex",
-       "lib/:lib_web_name/controllers/page_controller.ex"},
-      {:eex, "phx_web/views/page_view.ex", "lib/:lib_web_name/views/page_view.ex"},
-      {:eex, "phx_test/controllers/page_controller_test.exs",
-       "test/:lib_web_name/controllers/page_controller_test.exs"},
-      {:eex, "phx_test/views/page_view_test.exs", "test/:lib_web_name/views/page_view_test.exs"},
       {:eex, "phx_live/assets/topbar.js", "assets/vendor/topbar.js"},
       {:eex, "phx_web/templates/layout/root.html.heex",
        "lib/:lib_web_name/templates/layout/root.html.heex"},
@@ -48,8 +42,6 @@ defmodule Rio.New.Live do
       {:eex, "phx_web/templates/layout/live.html.heex",
        "lib/:lib_web_name/templates/layout/live.html.heex"},
       {:eex, "phx_web/views/layout_view.ex", "lib/:lib_web_name/views/layout_view.ex"},
-      {:eex, "phx_web/templates/page/index.html.heex",
-       "lib/:lib_web_name/templates/page/index.html.heex"},
       {:eex, "phx_test/views/layout_view_test.exs",
        "test/:lib_web_name/views/layout_view_test.exs"}
     ],
