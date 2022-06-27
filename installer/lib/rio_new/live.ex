@@ -48,6 +48,7 @@ defmodule Rio.New.Live do
     ecto: [
       {:eex, "phx_ecto/repo.ex", "lib/:app/repo.ex"},
       {:keep, "phx_ecto/priv/repo/migrations", "priv/repo/migrations"},
+      {:eex, "phx_ecto/setup_migration.exs", "priv/repo/migrations/00000000000000_db_setup.exs"},
       {:eex, "phx_ecto/formatter.exs", "priv/repo/migrations/.formatter.exs"},
       {:eex, "phx_ecto/seeds.exs", "priv/repo/seeds.exs"},
       {:eex, "phx_ecto/data_case.ex", "test/support/data_case.ex"}
