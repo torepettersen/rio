@@ -18,7 +18,7 @@ defmodule Rio.New.Live do
       {:eex, "phx_web/endpoint.ex", "lib/:lib_web_name/endpoint.ex"},
       {:eex, "rio_web/router.ex", "lib/:lib_web_name/router.ex"},
       {:eex, "phx_web/telemetry.ex", "lib/:lib_web_name/telemetry.ex"},
-      {:eex, "phx_single/lib/app_name_web.ex", "lib/:lib_web_name.ex"},
+      {:eex, "rio_live/app_name_web.ex", "lib/:lib_web_name.ex"},
       {:eex, "rio_live/mix.exs", "mix.exs"},
       {:eex, "phx_single/README.md", "README.md"},
       {:eex, "phx_single/formatter.exs", ".formatter.exs"},
@@ -43,7 +43,12 @@ defmodule Rio.New.Live do
        "lib/:lib_web_name/templates/layout/live.html.heex"},
       {:eex, "phx_web/views/layout_view.ex", "lib/:lib_web_name/views/layout_view.ex"},
       {:eex, "phx_test/views/layout_view_test.exs",
-       "test/:lib_web_name/views/layout_view_test.exs"}
+       "test/:lib_web_name/views/layout_view_test.exs"},
+      {:eex, "rio_live/components/button.ex", "lib/:lib_web_name/components/button.ex"},
+      {:eex, "rio_live/components/container.ex", "lib/:lib_web_name/components/container.ex"},
+      {:eex, "rio_live/components/navbar.ex", "lib/:lib_web_name/components/navbar.ex"},
+      {:eex, "rio_live/components/link.ex", "lib/:lib_web_name/components/link.ex"},
+      {:eex, "rio_live/components.ex", "lib/:lib_web_name/components.ex"}
     ],
     ecto: [
       {:eex, "phx_ecto/repo.ex", "lib/:app/repo.ex"},
