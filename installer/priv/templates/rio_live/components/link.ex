@@ -1,4 +1,4 @@
-defmodule <%= @web_namespace %>.Components.Link do
+defmodule <%= @web_namespace %>.LinkComponent do
   use <%= @web_namespace %>, :component
 
   def link(assigns) do

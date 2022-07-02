@@ -1,4 +1,4 @@
-defmodule <%= @web_namespace %>.Components.Button do
+defmodule <%= @web_namespace %>.ButtonComponent do
   use <%= @web_namespace %>, :component
 
   @base_style "group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2"

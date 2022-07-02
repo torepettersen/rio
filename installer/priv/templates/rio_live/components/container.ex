@@ -1,4 +1,4 @@
-defmodule <%= @web_namespace %>.Components.Container do
+defmodule <%= @web_namespace %>.ContainerComponent do
   use <%= @web_namespace %>, :component
 
   def container(assigns) do

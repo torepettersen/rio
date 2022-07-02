@@ -1,8 +1,6 @@
 defmodule <%= @web_namespace %>.Components do
-  alias <%= @web_namespace %>.Components
-
-  defdelegate button(assigns), to: Components.Button
-  defdelegate container(assigns), to: Components.Container
-  defdelegate link(assigns), to: Components.Link
-  defdelegate navbar(assigns), to: Components.Navbar
+  defdelegate button(assigns), to: <%= @web_namespace %>.ButtonComponent
+  defdelegate container(assigns), to: <%= @web_namespace %>.ContainerComponent
+  defdelegate link(assigns), to: <%= @web_namespace %>.LinkComponent
+  defdelegate navbar(assigns), to: <%= @web_namespace %>.NavbarComponent
 end

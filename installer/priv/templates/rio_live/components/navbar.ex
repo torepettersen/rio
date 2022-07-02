@@ -1,4 +1,4 @@
-defmodule <%= @web_namespace %>.Components.Navbar do
+defmodule <%= @web_namespace %>.NavbarComponent do
   use <%= @web_namespace %>, :component
 
   def navbar(assigns) do
