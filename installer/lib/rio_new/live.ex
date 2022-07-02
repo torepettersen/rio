@@ -25,7 +25,6 @@ defmodule Rio.New.Live do
       {:eex, "phx_single/gitignore", ".gitignore"},
       {:eex, "phx_test/support/conn_case.ex", "test/support/conn_case.ex"},
       {:eex, "phx_single/test/test_helper.exs", "test/test_helper.exs"},
-      {:keep, "phx_test/controllers", "test/:lib_web_name/controllers"},
       {:eex, "phx_test/views/error_view_test.exs", "test/:lib_web_name/views/error_view_test.exs"}
     ],
     gettext: [
@@ -35,15 +34,12 @@ defmodule Rio.New.Live do
     ],
     html: [
       {:eex, "phx_live/assets/topbar.js", "assets/vendor/topbar.js"},
-      {:eex, "phx_web/templates/layout/root.html.heex",
-       "lib/:lib_web_name/templates/layout/root.html.heex"},
-      {:eex, "phx_web/templates/layout/app.html.heex",
-       "lib/:lib_web_name/templates/layout/app.html.heex"},
+      {:eex, "rio_live/layout/root.html.heex", "lib/:lib_web_name/layout/root.html.heex"},
+      {:eex, "phx_web/templates/layout/app.html.heex", "lib/:lib_web_name/layout/app.html.heex"},
       {:eex, "phx_web/templates/layout/live.html.heex",
-       "lib/:lib_web_name/templates/layout/live.html.heex"},
-      {:eex, "phx_web/views/layout_view.ex", "lib/:lib_web_name/views/layout_view.ex"},
-      {:eex, "phx_test/views/layout_view_test.exs",
-       "test/:lib_web_name/views/layout_view_test.exs"},
+       "lib/:lib_web_name/layout/live.html.heex"},
+      {:eex, "rio_live/layout/view.ex", "lib/:lib_web_name/layout/view.ex"},
+      {:eex, "phx_test/views/layout_view_test.exs", "test/:lib_web_name/layout/view_test.exs"},
       {:eex, "rio_live/components/button.ex", "lib/:lib_web_name/components/button.ex"},
       {:eex, "rio_live/components/container.ex", "lib/:lib_web_name/components/container.ex"},
       {:eex, "rio_live/components/navbar.ex", "lib/:lib_web_name/components/navbar.ex"},
