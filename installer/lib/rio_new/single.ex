@@ -55,6 +55,7 @@ defmodule Rio.New.Single do
     ],
     ecto: [
       {:eex, "phx_ecto/repo.ex", "lib/:app/repo.ex"},
+      {:eex, "phx_ecto/schema.ex", "lib/:app/schema.ex"},
       {:keep, "phx_ecto/priv/repo/migrations", "priv/repo/migrations"},
       {:eex, "phx_ecto/setup_migration.exs", "priv/repo/migrations/00000000000000_db_setup.exs"},
       {:eex, "phx_ecto/formatter.exs", "priv/repo/migrations/.formatter.exs"},
