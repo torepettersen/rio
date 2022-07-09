@@ -12,7 +12,16 @@ defmodule <%= @web_namespace %>.ButtonComponent do
     """
   end
 
-  defp class(_assigns) do
-    Enum.join([@base_style, @variant_style], " ")
+  def button(assigns) do
+    ~H"""
+    <button class={class(assigns)}>
+      <%%= render_slot(@inner_block) %>
+    </button>
+    """
+  end
+
+  defp class(assigns) do
+    class = Access.get(assigns, :class)
+    Enum.join([@base_style, @variant_style, class], " ")
   end
 end

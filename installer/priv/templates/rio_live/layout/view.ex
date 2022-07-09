@@ -1,6 +1,6 @@
 defmodule <%= @web_namespace %>.LayoutView do
   use Phoenix.View,
-    root: "lib/hello_web",
+    root: "lib/<%= @lib_web_name %>",
     namespace: <%= @web_namespace %>
 
   use Phoenix.HTML
