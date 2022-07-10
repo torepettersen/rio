@@ -5,14 +5,12 @@ A generator for Phoenix LiveView projects.
 
 Add `rio` to your list of dependencies in `mix.exs`
 
-    ```elixir
     def deps do
       [
-        {:rio, "~> 0.1", only: [:dev], runtime: false}
+        {:rio, "~> 0.1", only: :dev, runtime: false}
         ...
       ]
     end
-    ```
 
 Install and compile dependencies
 

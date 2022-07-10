@@ -1,6 +1,8 @@
 defmodule <%= @web_namespace %>.NavbarComponent do
   use <%= @web_namespace %>, :component
 
+  alias <%= @web_namespace %>.Endpoint
+
   def navbar(assigns) do
     ~H"""
     <header class="py-10">
@@ -15,15 +17,21 @@ defmodule <%= @web_namespace %>.NavbarComponent do
               <.nav_link href="https://tailwindcss.com/">Tailwind CSS</.nav_link>
               <.nav_link href="https://tailwindui.com/">Tailwind UI</.nav_link>
               <%%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-                <.nav_link href={Routes.live_dashboard_path(<%= @web_namespace %>.Endpoint, :home)}>Live dashboard</.nav_link>
+                <.nav_link href={Routes.live_dashboard_path(Endpoint, :home)}>Live dashboard</.nav_link>
               <%% end %>
             </div>
           </div>
           <div class="flex items-center gap-x-5 md:gap-x-8">
-            <div class="hidden md:block">
-              <.nav_link href="/users/log_in">Sign in</.nav_link>
-            </div>
-            <.button href="/users/register">Register</.button>
+            <%%= if @current_user do %>
+              <.nav_link href={Routes.user_session_path(Endpoint, :delete)} method="delete">
+                Sign out
+              </.nav_link>
+            <%% else %>
+              <div class="hidden md:block">
+                <.nav_link href={Routes.user_session_path(Endpoint, :new)}>Sign in</.nav_link>
+              </div>
+              <.button href={Routes.user_registration_path(Endpoint, :new)}>Register</.button>
+            <%% end %>
           </div>
         </nav>
       </.container>
@@ -32,8 +40,10 @@ defmodule <%= @web_namespace %>.NavbarComponent do
   end
 
   defp nav_link(assigns) do
+    rest = Map.delete(assigns, :class)
+
     ~H"""
-    <.link href={@href} class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
+    <.link class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900" {rest}>
       <%%= render_slot(@inner_block) %>
     </.link>
     """

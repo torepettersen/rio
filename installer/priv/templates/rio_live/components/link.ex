@@ -1,11 +1,17 @@
 defmodule <%= @web_namespace %>.LinkComponent do
   use <%= @web_namespace %>, :component
 
-  def link(assigns) do
+  def link(%{href: href} = assigns) do
+    args =
+      assigns
+      |> Map.drop([:href, :inner_block])
+      |> Enum.to_list()
+      |> then(&[{:to, href} | &1])
+
     ~H"""
-    <a href={@href} class={assigns[:class]}>
+    <%%= link args do %>
       <%%= render_slot(@inner_block) %>
-    </a>
+    <%% end %>
     """
   end
 end
