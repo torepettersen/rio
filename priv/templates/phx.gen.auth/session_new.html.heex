@@ -6,7 +6,7 @@
     <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user} class="space-y-6">
       <%%= if @error_message do %>
         <.alert>
-          <p><%%= @error_message %></p>
+          <%%= @error_message %>
         </.alert>
       <%% end %>
 

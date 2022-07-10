@@ -38,6 +38,7 @@ defmodule Rio.New.Live do
       {:eex, "rio_live/layout/app.html.heex", "lib/:lib_web_name/layout/app.html.heex"},
       {:eex, "rio_live/layout/view.ex", "lib/:lib_web_name/layout/view.ex"},
       {:eex, "phx_test/views/layout_view_test.exs", "test/:lib_web_name/layout/view_test.exs"},
+      {:eex, "rio_live/landing_page_live.ex", "lib/:lib_web_name/modules/landing_page/live.ex"},
       {:eex, "rio_live/components/alert.ex", "lib/:lib_web_name/components/alert.ex"},
       {:eex, "rio_live/components/button.ex", "lib/:lib_web_name/components/button.ex"},
       {:eex, "rio_live/components/container.ex", "lib/:lib_web_name/components/container.ex"},

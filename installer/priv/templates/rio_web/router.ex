@@ -16,6 +16,8 @@ defmodule <%= @web_namespace %>.Router do
 
   scope "/", <%= @web_namespace %> do
     pipe_through :browser
+
+    live "/", LandingPageLive
   end
 
   # Other scopes may use custom stacks.
