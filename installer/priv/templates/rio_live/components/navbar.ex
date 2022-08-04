@@ -2,6 +2,8 @@ defmodule <%= @web_namespace %>.NavbarComponent do
   use <%= @web_namespace %>, :component
 
   alias <%= @web_namespace %>.Endpoint
+  alias <%= @web_namespace %>.UserSessionLive
+  alias <%= @web_namespace %>.UserRegistrationLive
 
   def navbar(assigns) do
     ~H"""
@@ -28,9 +30,9 @@ defmodule <%= @web_namespace %>.NavbarComponent do
               </.nav_link>
             <%% else %>
               <div class="hidden md:block">
-                <.nav_link href={Routes.user_session_path(Endpoint, :new)}>Sign in</.nav_link>
+                <.nav_link href={Routes.live_path(Endpoint, UserSessionLive)}>Sign in</.nav_link>
               </div>
-              <.button href={Routes.user_registration_path(Endpoint, :new)}>Register</.button>
+              <.button href={Routes.live_path(Endpoint, UserRegistrationLive)}>Register</.button>
             <%% end %>
           </div>
         </nav>

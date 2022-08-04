@@ -4,7 +4,7 @@ defmodule <%= @web_namespace %>.LinkComponent do
   def link(%{href: href} = assigns) do
     args =
       assigns
-      |> Map.drop([:href, :inner_block])
+      |> Map.drop([:__changed__, :href, :inner_block])
       |> Enum.to_list()
       |> then(&[{:to, href} | &1])
 

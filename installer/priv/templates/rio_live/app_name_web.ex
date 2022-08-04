@@ -19,6 +19,7 @@ defmodule <%= @web_namespace %> do
 
       import Plug.Conn<%= if @gettext do %>
       import <%= @web_namespace %>.Gettext<% end %>
+      import Phoenix.LiveView.Controller
       alias <%= @web_namespace %>.Router.Helpers, as: Routes
     end
   end
