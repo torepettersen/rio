@@ -43,8 +43,9 @@ defmodule Rio.New.Live do
       {:eex, "rio_live/components/button.ex", "lib/:lib_web_name/components/button.ex"},
       {:eex, "rio_live/components/container.ex", "lib/:lib_web_name/components/container.ex"},
       {:eex, "rio_live/components/form_input.ex", "lib/:lib_web_name/components/form_input.ex"},
-      {:eex, "rio_live/components/icons.ex", "lib/:lib_web_name/components/icons.ex"},
       {:eex, "rio_live/components/navbar.ex", "lib/:lib_web_name/components/navbar.ex"},
+      {:eex, "rio_live/components/notification.ex",
+       "lib/:lib_web_name/components/notification.ex"},
       {:eex, "rio_live/components/link.ex", "lib/:lib_web_name/components/link.ex"},
       {:eex, "rio_live/components.ex", "lib/:lib_web_name/components.ex"}
     ],

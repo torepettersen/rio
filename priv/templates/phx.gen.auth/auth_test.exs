@@ -4,7 +4,6 @@ defmodule <%= inspect auth_module %>Test do
   alias <%= inspect context.module %>
   alias <%= inspect context.web_module %>.<%= inspect web_module_prefix %>Auth
   alias <%= inspect context.web_module %>.<%= inspect web_module_prefix %>SessionLive
-  import <%= inspect context.module %>Fixtures
 
   @remember_me_cookie "_<%= web_app_name %>_<%= schema.singular %>_remember_me"
 
@@ -14,7 +13,7 @@ defmodule <%= inspect auth_module %>Test do
       |> Map.replace!(:secret_key_base, <%= inspect endpoint_module %>.config(:secret_key_base))
       |> init_test_session(%{})
 
-    %{<%= schema.singular %>: <%= schema.singular %>_fixture(), conn: conn}
+    %{<%= schema.singular %>: insert(:<%= schema.singular %>), conn: conn}
   end
 
   describe "log_in_<%= schema.singular %>/3" do

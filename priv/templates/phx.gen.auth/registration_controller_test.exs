@@ -1,16 +1,12 @@
 defmodule <%= inspect context.web_module %>.<%= inspect Module.concat(schema.web_namespace, schema.alias) %>RegistrationControllerTest do
   use <%= inspect context.web_module %>.ConnCase<%= test_case_options %>
 
-  import <%= inspect context.module %>Fixtures
-
   describe "POST <%= web_path_prefix %>/registration" do
     @tag :capture_log
     test "creates account and logs the <%= schema.singular %> in", %{conn: conn} do
-      email = unique_<%= schema.singular %>_email()
-
       conn =
         post(conn, Routes.<%= schema.route_helper %>_registration_path(conn, :create), %{
-          "<%= schema.singular %>" => valid_<%= schema.singular %>_attributes(email: email)
+          "<%= schema.singular %>" => params_for(:<%= schema.singular %>, password: valid_<%= schema.singular %>_password())
         })
 
       assert get_session(conn, :<%= schema.singular %>_token)

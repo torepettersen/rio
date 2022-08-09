@@ -227,6 +227,7 @@ defmodule Mix.Tasks.Rio.Gen.Auth do
       {:eex, "schema_token.ex", Path.join([context.dir, "#{schema.singular}_token.ex"])},
       {:eex, "auth.ex", Path.join([web_prefix, "modules", web_path, "#{schema.singular}_auth.ex"])},
       {:eex, "auth_test.exs", Path.join([web_test_prefix, "modules", web_path, "#{schema.singular}_auth_test.exs"])},
+      {:eex, "factory.ex", Path.join(["test", "support", "factory.ex"])},
       # {:eex, "confirmation_view.ex",
       #  Path.join([web_prefix, "modules", web_path, "#{schema.singular}_confirmation", "view.ex"])},
       # {:eex, "confirmation_new.html.heex",
@@ -301,7 +302,6 @@ defmodule Mix.Tasks.Rio.Gen.Auth do
     Mix.Phoenix.copy_from(paths, "priv/templates/phx.gen.auth", binding, files)
     inject_context_functions(context, paths, binding)
     inject_tests(context, paths, binding)
-    inject_context_test_fixtures(context, paths, binding)
 
     context
   end
@@ -322,15 +322,6 @@ defmodule Mix.Tasks.Rio.Gen.Auth do
     |> Mix.Phoenix.eval_from("priv/templates/phx.gen.auth/test_cases.exs", binding)
     |> prepend_newline()
     |> inject_before_final_end(test_file)
-  end
-
-  defp inject_context_test_fixtures(%Context{test_fixtures_file: test_fixtures_file} = context, paths, binding) do
-    Gen.Context.ensure_test_fixtures_file_exists(context, paths, binding)
-
-    paths
-    |> Mix.Phoenix.eval_from("priv/templates/phx.gen.auth/context_fixtures_functions.ex", binding)
-    |> prepend_newline()
-    |> inject_before_final_end(test_fixtures_file)
   end
 
   defp inject_conn_case_helpers(%Context{} = context, paths, binding) do

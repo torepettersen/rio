@@ -1,10 +1,8 @@
 defmodule <%= inspect context.web_module %>.<%= inspect Module.concat(schema.web_namespace, schema.alias) %>SessionControllerTest do
   use <%= inspect context.web_module %>.ConnCase<%= test_case_options %>
 
-  import <%= inspect context.module %>Fixtures
-
   setup do
-    %{<%= schema.singular %>: <%= schema.singular %>_fixture()}
+    %{<%= schema.singular %>: insert(:<%= schema.singular %>)}
   end
 
   describe "POST <%= web_path_prefix %>/sign-in" do

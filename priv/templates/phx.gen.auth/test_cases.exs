@@ -1,4 +1,3 @@
-  import <%= inspect context.module %>Fixtures
   alias <%= inspect context.module %>.{<%= inspect schema.alias %>, <%= inspect schema.alias %>Token}
 
   describe "get_<%= schema.singular %>_by_email/1" do
@@ -7,7 +6,7 @@
     end
 
     test "returns the <%= schema.singular %> if the email exists" do
-      %{id: id} = <%= schema.singular %> = <%= schema.singular %>_fixture()
+      %{id: id} = <%= schema.singular %> = insert(:<%= schema.singular %>)
       assert %<%= inspect schema.alias %>{id: ^id} = <%= inspect context.alias %>.get_<%= schema.singular %>_by_email(<%= schema.singular %>.email)
     end
   end
@@ -18,12 +17,12 @@
     end
 
     test "does not return the <%= schema.singular %> if the password is not valid" do
-      <%= schema.singular %> = <%= schema.singular %>_fixture()
+      <%= schema.singular %> = insert(:<%= schema.singular %>)
       refute <%= inspect context.alias %>.get_<%= schema.singular %>_by_email_and_password(<%= schema.singular %>.email, "invalid")
     end
 
     test "returns the <%= schema.singular %> if the email and password are valid" do
-      %{id: id} = <%= schema.singular %> = <%= schema.singular %>_fixture()
+      %{id: id} = <%= schema.singular %> = insert(:<%= schema.singular %>)
 
       assert %<%= inspect schema.alias %>{id: ^id} =
                <%= inspect context.alias %>.get_<%= schema.singular %>_by_email_and_password(<%= schema.singular %>.email, valid_<%= schema.singular %>_password())
@@ -38,7 +37,7 @@
     end
 
     test "returns the <%= schema.singular %> with the given id" do
-      %{id: id} = <%= schema.singular %> = <%= schema.singular %>_fixture()
+      %{id: id} = <%= schema.singular %> = insert(:<%= schema.singular %>)
       assert %<%= inspect schema.alias %>{id: ^id} = <%= inspect context.alias %>.get_<%= schema.singular %>!(<%= schema.singular %>.id)
     end
   end
@@ -70,7 +69,7 @@
     end
 
     test "validates email uniqueness" do
-      %{email: email} = <%= schema.singular %>_fixture()
+      %{email: email} = insert(:<%= schema.singular %>)
       {:error, changeset} = <%= inspect context.alias %>.register_<%= schema.singular %>(%{email: email})
       assert "has already been taken" in errors_on(changeset).email
 
@@ -80,8 +79,8 @@
     end
 
     test "registers <%= schema.plural %> with a hashed password" do
-      email = unique_<%= schema.singular %>_email()
-      {:ok, <%= schema.singular %>} = <%= inspect context.alias %>.register_<%= schema.singular %>(valid_<%= schema.singular %>_attributes(email: email))
+      %{email: email} = params = params_for(:<%= schema.singular %>, password: valid_<%= schema.singular %>_password())
+      {:ok, <%= schema.singular %>} = <%= inspect context.alias %>.register_<%= schema.singular %>(params)
       assert <%= schema.singular %>.email == email
       assert is_binary(<%= schema.singular %>.hashed_password)
       assert is_nil(<%= schema.singular %>.confirmed_at)
@@ -96,14 +95,10 @@
     end
 
     test "allows fields to be set" do
-      email = unique_<%= schema.singular %>_email()
       password = valid_<%= schema.singular %>_password()
+      %{email: email} = params = params_for(:<%= schema.singular %>, password: password)
 
-      changeset =
-        <%= inspect context.alias %>.change_<%= schema.singular %>_registration(
-          %<%= inspect schema.alias %>{},
-          valid_<%= schema.singular %>_attributes(email: email, password: password)
-        )
+      changeset = <%= inspect context.alias %>.change_<%= schema.singular %>_registration(%<%= inspect schema.alias %>{}, params)
 
       assert changeset.valid?
       assert get_change(changeset, :email) == email
@@ -121,7 +116,7 @@
 
   describe "apply_<%= schema.singular %>_email/3" do
     setup do
-      %{<%= schema.singular %>: <%= schema.singular %>_fixture()}
+      %{<%= schema.singular %>: insert(:<%= schema.singular %>)}
     end
 
     test "requires email to change", %{<%= schema.singular %>: <%= schema.singular %>} do
@@ -146,7 +141,7 @@
     end
 
     test "validates email uniqueness", %{<%= schema.singular %>: <%= schema.singular %>} do
-      %{email: email} = <%= schema.singular %>_fixture()
+      %{email: email} = insert(:<%= schema.singular %>)
 
       {:error, changeset} =
         <%= inspect context.alias %>.apply_<%= schema.singular %>_email(<%= schema.singular %>, valid_<%= schema.singular %>_password(), %{email: email})
@@ -155,14 +150,13 @@
     end
 
     test "validates current password", %{<%= schema.singular %>: <%= schema.singular %>} do
-      {:error, changeset} =
-        <%= inspect context.alias %>.apply_<%= schema.singular %>_email(<%= schema.singular %>, "invalid", %{email: unique_<%= schema.singular %>_email()})
+      {:error, changeset} = <%= inspect context.alias %>.apply_<%= schema.singular %>_email(<%= schema.singular %>, "invalid", params_for(:<%= schema.singular %>))
 
       assert %{current_password: ["is not valid"]} = errors_on(changeset)
     end
 
     test "applies the email without persisting it", %{<%= schema.singular %>: <%= schema.singular %>} do
-      email = unique_<%= schema.singular %>_email()
+      %{email: email} = params_for(:<%= schema.singular %>)
       {:ok, <%= schema.singular %>} = <%= inspect context.alias %>.apply_<%= schema.singular %>_email(<%= schema.singular %>, valid_<%= schema.singular %>_password(), %{email: email})
       assert <%= schema.singular %>.email == email
       assert <%= inspect context.alias %>.get_<%= schema.singular %>!(<%= schema.singular %>.id).email != email
@@ -171,7 +165,7 @@
 
   describe "deliver_update_email_instructions/3" do
     setup do
-      %{<%= schema.singular %>: <%= schema.singular %>_fixture()}
+      %{<%= schema.singular %>: insert(:<%= schema.singular %>)}
     end
 
     test "sends token through notification", %{<%= schema.singular %>: <%= schema.singular %>} do
@@ -190,8 +184,8 @@
 
   describe "update_<%= schema.singular %>_email/2" do
     setup do
-      <%= schema.singular %> = <%= schema.singular %>_fixture()
-      email = unique_<%= schema.singular %>_email()
+      <%= schema.singular %> = insert(:<%= schema.singular %>)
+      %{email: email} = params_for(:<%= schema.singular %>)
 
       token =
         extract_<%= schema.singular %>_token(fn url ->
@@ -251,7 +245,7 @@
 
   describe "update_<%= schema.singular %>_password/3" do
     setup do
-      %{<%= schema.singular %>: <%= schema.singular %>_fixture()}
+      %{<%= schema.singular %>: insert(:<%= schema.singular %>)}
     end
 
     test "validates password", %{<%= schema.singular %>: <%= schema.singular %>} do
@@ -307,7 +301,7 @@
 
   describe "generate_<%= schema.singular %>_session_token/1" do
     setup do
-      %{<%= schema.singular %>: <%= schema.singular %>_fixture()}
+      %{<%= schema.singular %>: insert(:<%= schema.singular %>)}
     end
 
     test "generates a token", %{<%= schema.singular %>: <%= schema.singular %>} do
@@ -319,7 +313,7 @@
       assert_raise Ecto.ConstraintError, fn ->
         Repo.insert!(%<%= inspect schema.alias %>Token{
           token: <%= schema.singular %>_token.token,
-          <%= schema.singular %>_id: <%= schema.singular %>_fixture().id,
+          <%= schema.singular %>_id: insert(:<%= schema.singular %>).id,
           context: "session"
         })
       end
@@ -328,7 +322,7 @@
 
   describe "get_<%= schema.singular %>_by_session_token/1" do
     setup do
-      <%= schema.singular %> = <%= schema.singular %>_fixture()
+      <%= schema.singular %> = insert(:<%= schema.singular %>) 
       token = <%= inspect context.alias %>.generate_<%= schema.singular %>_session_token(<%= schema.singular %>)
       %{<%= schema.singular %>: <%= schema.singular %>, token: token}
     end
@@ -350,7 +344,7 @@
 
   describe "delete_session_token/1" do
     test "deletes the token" do
-      <%= schema.singular %> = <%= schema.singular %>_fixture()
+      <%= schema.singular %> = insert(:<%= schema.singular %>) 
       token = <%= inspect context.alias %>.generate_<%= schema.singular %>_session_token(<%= schema.singular %>)
       assert <%= inspect context.alias %>.delete_session_token(token) == :ok
       refute <%= inspect context.alias %>.get_<%= schema.singular %>_by_session_token(token)
@@ -359,7 +353,7 @@
 
   describe "deliver_<%= schema.singular %>_confirmation_instructions/2" do
     setup do
-      %{<%= schema.singular %>: <%= schema.singular %>_fixture()}
+      %{<%= schema.singular %>: insert(:<%= schema.singular %>)}
     end
 
     test "sends token through notification", %{<%= schema.singular %>: <%= schema.singular %>} do
@@ -378,7 +372,7 @@
 
   describe "confirm_<%= schema.singular %>/1" do
     setup do
-      <%= schema.singular %> = <%= schema.singular %>_fixture()
+      <%= schema.singular %> = insert(:<%= schema.singular %>) 
 
       token =
         extract_<%= schema.singular %>_token(fn url ->
@@ -412,7 +406,7 @@
 
   describe "deliver_<%= schema.singular %>_reset_password_instructions/2" do
     setup do
-      %{<%= schema.singular %>: <%= schema.singular %>_fixture()}
+      %{<%= schema.singular %>: insert(:<%= schema.singular %>)}
     end
 
     test "sends token through notification", %{<%= schema.singular %>: <%= schema.singular %>} do
@@ -431,7 +425,7 @@
 
   describe "get_<%= schema.singular %>_by_reset_password_token/1" do
     setup do
-      <%= schema.singular %> = <%= schema.singular %>_fixture()
+      <%= schema.singular %> = insert(:<%= schema.singular %>) 
 
       token =
         extract_<%= schema.singular %>_token(fn url ->
@@ -460,7 +454,7 @@
 
   describe "reset_<%= schema.singular %>_password/2" do
     setup do
-      %{<%= schema.singular %>: <%= schema.singular %>_fixture()}
+      %{<%= schema.singular %>: insert(:<%= schema.singular %>)}
     end
 
     test "validates password", %{<%= schema.singular %>: <%= schema.singular %>} do
@@ -499,4 +493,10 @@
     test "does not include password" do
       refute inspect(%<%= inspect schema.alias %>{password: "123456"}) =~ "password: \"123456\""
     end
+  end
+
+  def extract_<%= schema.singular %>_token(fun) do
+    {:ok, captured_email} = fun.(&"[TOKEN]#{&1}[TOKEN]")
+    [_, token | _] = String.split(captured_email.text_body, "[TOKEN]")
+    token
   end

@@ -54,6 +54,7 @@ defmodule <%= @app_module %>.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:heroicons, "~> 0.3"},
       {:ex_machina, "~> 2.7.0", only: :test},
       {:rio, github: "torepettersen/rio", only: :dev, runtime: false}
     ]
