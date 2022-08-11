@@ -11,7 +11,7 @@ defmodule <%= @web_namespace %>.NavbarComponent do
       <.container>
         <nav class="relative z-50 flex justify-between">
           <div class="flex items-center md:gap-x-12">
-            <.link href="/" class="text-xl text-bold">
+            <.link navigate="/" class="text-xl text-bold">
               Rio<span class="text-blue-600">Generator</span>
             </.link>
             <div class="hidden md:flex md:gap-x-6">
@@ -30,9 +30,9 @@ defmodule <%= @web_namespace %>.NavbarComponent do
               </.nav_link>
             <%% else %>
               <div class="hidden md:block">
-                <.nav_link href={Routes.live_path(Endpoint, UserSessionLive)}>Sign in</.nav_link>
+                <.nav_link navigate={Routes.live_path(Endpoint, UserSessionLive)}>Sign in</.nav_link>
               </div>
-              <.button href={Routes.live_path(Endpoint, UserRegistrationLive)}>Register</.button>
+              <.button navigate={Routes.live_path(Endpoint, UserRegistrationLive)}>Register</.button>
             <%% end %>
           </div>
         </nav>

@@ -1,7 +1,7 @@
 <.container>
   <div class="py-16 mx-auto max-w-sm">
     <h1 class="text-3xl font-extrabold text-gray-900">Register</h1>
-    <p class="mt-2 text-sm text-gray-700">Already registered? <.link class="font-medium text-blue-600 hover:underline" href={Routes.live_path(@socket, <%= inspect web_module_prefix %>SessionLive)}>Sign in</.link> to your account.</p>
+    <p class="mt-2 text-sm text-gray-700">Already registered? <.link class="font-medium text-blue-600 hover:underline" navigate={Routes.live_path(@socket, <%= inspect web_module_prefix %>SessionLive)}>Sign in</.link> to your account.</p>
 
     <.form let={f} for={@changeset} action={Routes.<%= schema.singular %>_registration_path(@socket, :create)} class="space-y-6">
       <%%= if @changeset.action do %>
