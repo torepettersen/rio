@@ -45,6 +45,7 @@ defmodule <%= @web_namespace %> do
         layout: {<%= @web_namespace %>.LayoutView, "live.html"}
 
       unquote(view_helpers())
+      on_mount <%= @web_namespace %>.InitAssigns
     end
   end
 

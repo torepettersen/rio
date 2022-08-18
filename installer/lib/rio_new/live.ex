@@ -17,6 +17,7 @@ defmodule Rio.New.Live do
       {:eex, "phx_web/endpoint.ex", "lib/:lib_web_name/endpoint.ex"},
       {:eex, "phx_web/router.ex", "lib/:lib_web_name/router.ex"},
       {:eex, "phx_web/telemetry.ex", "lib/:lib_web_name/telemetry.ex"},
+      {:eex, "phx_web/init_assigns.ex", "lib/:lib_web_name/init_assigns.ex"},
       {:eex, "rio_live/app_name_web.ex", "lib/:lib_web_name.ex"},
       {:eex, "rio_live/mix.exs", "mix.exs"},
       {:eex, "phx_single/README.md", "README.md"},
@@ -51,6 +52,7 @@ defmodule Rio.New.Live do
     ],
     ecto: [
       {:eex, "phx_ecto/repo.ex", "lib/:app/repo.ex"},
+      {:eex, "phx_ecto/policy.ex", "lib/:app/policy.ex"},
       {:eex, "phx_ecto/schema.ex", "lib/:app/schema.ex"},
       {:keep, "phx_ecto/priv/repo/migrations", "priv/repo/migrations"},
       {:eex, "phx_ecto/setup_migration.exs", "priv/repo/migrations/00000000000000_db_setup.exs"},
